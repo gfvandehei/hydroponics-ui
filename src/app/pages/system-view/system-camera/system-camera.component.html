@@ -1,0 +1,6 @@
+<div class="camera-controls">
+    <button (click)="updateImage()">Refresh</button>
+</div>
+<div class="camera-container">
+    <img #imageContainer *ngIf="camera != null" src="image">
+</div>
