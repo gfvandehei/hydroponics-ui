@@ -16,7 +16,11 @@ export class DhtSensorWrapper{
     private system: SystemObject;
     private http: HttpClient;
     private baseUrl: string;
-    private logData: Array<{temperature: number, humidity: number}> = [];
+    private logData: Array<{
+        temperature: number, 
+        humidity: number,
+        timestamp: string
+    }> = [];
 
     public data: {temperature: number, humidity: number} = {
         temperature: 0.0,
@@ -42,7 +46,8 @@ export class DhtSensorWrapper{
     getSensorLogInformation(){
         this.http.get<APIBaseResponse<Array<{
             temperature: number,
-            humidity: number
+            humidity: number,
+            timestamp: string
         }>>>(`${this.baseUrl}/log`).subscribe((result) => {
             this.logData = result.data;
             console.log("LOGDATA", this.logData);
