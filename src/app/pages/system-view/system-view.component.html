@@ -1,4 +1,4 @@
-<div class="system-header">
+<div class="system-header" *ngIf="systemObject">
     <div class="system-header-text-left">
         {{systemObject!.system.address}}
     </div>
@@ -7,7 +7,7 @@
         {{systemObject!.system.id}}
     </div>
 </div>
-<div class="system-body">
+<div class="system-body" *ngIf="systemObject">
     <div class="system-nav-sidebar">
         <a mat-button [matMenuTriggerFor]="cameraSelector">Camera</a>
         <a mat-button [routerLink]="['./sensor']">Sensor</a>
@@ -20,11 +20,13 @@
 
 <!--Camera Side Menu-->
 <mat-menu #cameraSelector="matMenu">
-    <a 
-        mat-menu-item
-         *ngFor="let camera of systemObject!.cameras.value; let i = index;"
-        [routerLink]="['./camera', i]">
-        {{camera.camera.name}}
-    </a>
+    <div *ngIf="systemObject != null">
+        <a
+            mat-menu-item
+            *ngFor="let camera of systemObject!.cameras.value; let i = index;"
+            [routerLink]="['./camera', i]">
+            {{camera.camera.name}}
+        </a>
+    </div>
 </mat-menu>
 
