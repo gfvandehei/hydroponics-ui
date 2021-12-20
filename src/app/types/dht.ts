@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { APIBaseResponse } from "../models/api";
 import { SystemObject } from "../models/system";
+import { BehaviorSubject } from "rxjs";
 
 export interface DHTSensor{
     label: string
@@ -11,16 +12,30 @@ export interface DHTSensor{
     id: number
 }
 
+export interface DHTSensorLogDatapoint{
+    temperature: number;
+    humidity: number;
+    timestamp: string;
+}
+
 export class DhtSensorWrapper{
     public dht: DHTSensor;
     private system: SystemObject;
     private http: HttpClient;
     private baseUrl: string;
-    private logData: Array<{
+    public logData: Array<{
         temperature: number, 
         humidity: number,
         timestamp: string
     }> = [];
+
+    public dataUpdate: BehaviorSubject<{
+        logData: Array<{
+            temperature: number,
+            humidity: number,
+            timestamp: string
+        }>,
+    }> = new BehaviorSubject({logData: new Array()});
 
     public data: {temperature: number, humidity: number} = {
         temperature: 0.0,
@@ -44,13 +59,12 @@ export class DhtSensorWrapper{
     }
 
     getSensorLogInformation(){
-        this.http.get<APIBaseResponse<Array<{
-            temperature: number,
-            humidity: number,
-            timestamp: string
-        }>>>(`${this.baseUrl}/log`).subscribe((result) => {
+        this.http.get<APIBaseResponse<Array<DHTSensorLogDatapoint>>>(`${this.baseUrl}/log`).subscribe((result) => {
             this.logData = result.data;
             console.log("LOGDATA", this.logData);
+            let oldValue = this.dataUpdate.getValue();
+            oldValue.logData = this.logData;
+            this.dataUpdate.next(oldValue);
         });
     }
 }

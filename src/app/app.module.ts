@@ -35,6 +35,8 @@ import { SystemAutomationComponent } from './pages/system-view/system-automation
 import { PumpInfoCardComponent } from './components/pump-info-card/pump-info-card.component';
 import { PumpScheduleDisplayComponent } from './components/pump-schedule-display/pump-schedule-display.component';
 import { NewTimeDialogComponent } from './components/pump-schedule-display/new-time-dialog/new-time-dialog.component';
+import { DhtCanvasLineGraphComponent } from './components/dht-canvas-line-graph/dht-canvas-line-graph.component';
+import {NgApexchartsModule} from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import { NewTimeDialogComponent } from './components/pump-schedule-display/new-t
     SystemAutomationComponent,
     PumpInfoCardComponent,
     PumpScheduleDisplayComponent,
-    NewTimeDialogComponent
+    NewTimeDialogComponent,
+    DhtCanvasLineGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ import { NewTimeDialogComponent } from './components/pump-schedule-display/new-t
     FormsModule,
     ReactiveFormsModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    NgApexchartsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true}
