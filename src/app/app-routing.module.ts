@@ -32,6 +32,10 @@ const routes: Routes = [
       {path: 'sensor', component: SystemSensorsComponent},
       {path: "automation", component: SystemAutomationComponent}
     ]
+  },
+  {
+    path: "**",
+    component: SystemsHomeComponent
   }
 ];
 
