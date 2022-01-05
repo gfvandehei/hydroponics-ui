@@ -38,14 +38,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .color-secondary-background{
-    background-color: #00AB84;
-    color: white;
+    background-color: rgba(0,0,0,.05);
+    color: black;
 }
 
 .color-primary-background{
-    background-color: #deedff;
+    background-color: white;
 }
 
 .flex-spacer{
     flex-grow: 1;
+}
+
+.apexcharts-tooltip {
+    color: #000000;
+}
+  
+.apexcharts-tooltip .apexcharts-tooltip-series-group.active {
+    background: #ffffff !important;
 }

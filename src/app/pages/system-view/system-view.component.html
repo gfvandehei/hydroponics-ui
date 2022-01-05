@@ -9,9 +9,18 @@
 </div>
 <div class="system-body" *ngIf="systemObject">
     <div class="system-nav-sidebar">
-        <a mat-button [matMenuTriggerFor]="cameraSelector">Camera</a>
-        <a mat-button [routerLink]="['./sensor']">Sensor</a>
-        <a mat-button [routerLink]="['./automation']">Automation</a>
+        <a mat-button [matMenuTriggerFor]="cameraSelector">
+            Camera
+            <mat-icon>camera_enhance</mat-icon>
+        </a>
+        <a mat-button [routerLink]="['./sensor']">
+            Sensor
+            <mat-icon>router</mat-icon>
+        </a>
+        <a mat-button [routerLink]="['./automation']">
+            Automation
+            <mat-icon>av_timer</mat-icon>
+        </a>
     </div>
     <div class="system-nav-display">
         <router-outlet></router-outlet>

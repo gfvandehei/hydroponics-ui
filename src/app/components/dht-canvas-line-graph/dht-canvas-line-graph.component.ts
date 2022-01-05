@@ -62,11 +62,17 @@ export class DhtCanvasLineGraphComponent implements AfterViewInit{
       console.log(this.chart);
       let temperatures: number[] = [];
       let humidities: number[] = [];
+      let timestamps: string[] = [];
       result.logData.forEach((datapoint) => {
         temperatures.push(datapoint.temperature);
         humidities.push(datapoint.humidity);
+        timestamps.push(datapoint.timestamp);
       });
       this.chartObject?.render().then(() => {
+        this.chartOptions!.xaxis = {
+          categories: timestamps
+        };
+        this.chartObject?.updateOptions(this.chartOptions);
         this.chartObject?.updateSeries([
           {
             name: "temperatures",
